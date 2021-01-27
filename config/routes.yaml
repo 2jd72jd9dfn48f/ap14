@@ -7,3 +7,9 @@ home:
     path: /
     controller: App\Controller\HomeController::index
     methods: [GET,POST]
+
+# config/routes.yaml
+login:
+    path:       /login
+    controller: App\Controller\SecurityController::login
+    methods: POST

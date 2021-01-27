@@ -1,14 +1,13 @@
 <?php
 
 namespace App\Entity;
-use DateTimeInterface;
-use Exception;
+
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * Tour
  *
- * @ORM\Table(name="tour", indexes={@ORM\Index(name="IDX_6AD1F9693397707A", columns={"categoria_id"})})
+ * @ORM\Table(name="tour", indexes={@ORM\Index(name="categoria_id", columns={"categoria_id"})})
  * @ORM\Entity
  */
 class Tour
@@ -44,9 +43,9 @@ class Tour
     private $description;
 
     /**
-     * @var \DateTime
+     * @var \DateTime|null
      *
-     * @ORM\Column(name="date", type="date", nullable=false)
+     * @ORM\Column(name="date", type="date", nullable=true)
      */
     private $date;
 
@@ -73,99 +72,6 @@ class Tour
      * })
      */
     private $categoria;
-
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
-
-    public function getTitulo(): ?string
-    {
-        return $this->titulo;
-    }
-
-    public function setTitulo(string $titulo): self
-    {
-        $this->titulo = $titulo;
-
-        return $this;
-    }
-
-    public function getImagen(): ?string
-    {
-        return $this->imagen;
-    }
-
-    public function setImagen(string $imagen): self
-    {
-        $this->imagen = $imagen;
-
-        return $this;
-    }
-
-    public function getDescription(): ?string
-    {
-        return $this->description;
-    }
-
-    public function setDescription(string $description): self
-    {
-        $this->description = $description;
-
-        return $this;
-    }
-
-    public function getDate(): ?\DateTimeInterface
-    {
-        return $this->date;
-    }
-
-    public function setDate(?\DateTime $date): self
-    {
-
-     
-        $this->date = $date;
-    
-        return $this;
-
-
-    }
-
-    public function getDays(): ?string
-    {
-        return $this->days;
-    }
-
-    public function setDays(string $days): self
-    {
-        $this->days = $days;
-
-        return $this;
-    }
-
-    public function getPrice(): ?string
-    {
-        return $this->price;
-    }
-
-    public function setPrice(string $price): self
-    {
-        $this->price = $price;
-
-        return $this;
-    }
-
-    public function getCategoria(): ?Categoria
-    {
-        return $this->categoria;
-    }
-
-    public function setCategoria(?Categoria $categoria): self
-    {
-        $this->categoria = $categoria;
-
-        return $this;
-    }
 
 
 }
