@@ -1,8 +1,7 @@
 <?php
 
 namespace App\Entity;
-use DateTimeInterface;
-use Exception;
+
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -44,9 +43,9 @@ class Tour
     private $description;
 
     /**
-     * @var \DateTime
+     * @var string
      *
-     * @ORM\Column(name="date", type="date", nullable=false)
+     * @ORM\Column(name="date", type="string", length=255, nullable=false)
      */
     private $date;
 
@@ -115,20 +114,16 @@ class Tour
         return $this;
     }
 
-    public function getDate(): ?\DateTimeInterface
+    public function getDate(): ?string
     {
         return $this->date;
     }
 
-    public function setDate(?\DateTime $date): self
+    public function setDate(string $date): self
     {
-
-     
         $this->date = $date;
-    
+
         return $this;
-
-
     }
 
     public function getDays(): ?string
