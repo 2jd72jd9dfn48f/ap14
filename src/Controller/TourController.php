@@ -133,11 +133,11 @@ class TourController
     }
 
 
-    public function queryBuilder()
+/*     public function queryBuilder()
     {
     $num = 1;
 
-    $tours = $this->tours()
+    $tours = $this->getDoctrine()
         ->getRepository(Tour::class)
         ->findAllWithCategory($num);
 
@@ -148,6 +148,35 @@ class TourController
      echo $tour->getTitulo()."<br>";
     }
     die();
-    }
+    } */
 
+
+    
+    /**
+     * @Route("/query/{num}", name="querys", methods={"GET"})
+     */
+    public function toursCategorias($num): JsonResponse
+    {
+
+        $tours = $this->getDoctrine()
+        ->getRepository(Tour::class)
+        ->findAllWithCategory($num);
+
+
+        foreach($tours as $tour)
+        {
+            $data[] = [
+                'id' => $tour->getId(),
+                'name' => $tour->getTitulo(),
+                'image' => $tour->getImagen(),
+                'description' => $tour->getDescription(),
+                'date' => $tour->getDate(),
+                'days' => $tour->getDays(),
+                'price' => $tour->getPrice(),
+                'categoria' => $tour->getCategoria(),
+            ];
+            
+        }
+    return new JsonResponse($data, Response::HTTP_OK);
+    }
 }

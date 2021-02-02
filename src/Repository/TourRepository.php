@@ -60,7 +60,7 @@ class TourRepository extends ServiceEntityRepository
      */
     public function findAllWithCategory(int $num): array
     {
-        $entityManager = $this->getEntityManager();
+        $entityManager = $this->manager;
 
         $query = $entityManager->createQuery(
             'SELECT t
@@ -70,7 +70,6 @@ class TourRepository extends ServiceEntityRepository
             ORDER BY t.id ASC'
         )->setParameter('id_categoria', $num);
 
-        // returns an array of Product objects
         return $query->getResult();
     }
 
