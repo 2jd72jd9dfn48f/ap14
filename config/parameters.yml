@@ -1,0 +1,9 @@
+# app/config/parameters.yml
+parameters:
+    database_driver:    mysql
+    database_host:      localhost
+    database_name:      tours
+    database_user:      root
+    database_password:  
+
+# ...

@@ -9,6 +9,9 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\EntityManagerInterface;
+use App\Entity\Tour;
 
 /**
  * Class TourController
@@ -128,4 +131,23 @@ class TourController
 
         return new JsonResponse(['status' => 'Tour deleted'], Response::HTTP_OK);
     }
+
+
+    public function queryBuilder()
+    {
+    $num = 1;
+
+    $tours = $this->tours()
+        ->getRepository(Tour::class)
+        ->findAllWithCategory($num);
+
+
+    foreach($data as $tour){
+
+
+     echo $tour->getTitulo()."<br>";
+    }
+    die();
+    }
+
 }

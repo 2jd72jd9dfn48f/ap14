@@ -5,11 +5,12 @@ namespace App\Entity;
 use App\Repository\UserRepository;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Doctrine\ORM\EntityRepository;
 
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
  */
-class User implements UserInterface
+class User extends EntityRepository implements UserInterface
 {
     /**
      * @ORM\Id
@@ -123,4 +124,5 @@ class User implements UserInterface
 
         return $this;
     }
+
 }

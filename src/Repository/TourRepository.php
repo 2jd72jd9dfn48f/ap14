@@ -9,6 +9,7 @@ use Doctrine\Persistence\ManagerRegistry;
 use DateTimeInterface;
 use Exception;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\EntityRepository;
 
 /**
  * @method Tour|null find($id, $lockMode = null, $lockVersion = null)
@@ -54,6 +55,40 @@ class TourRepository extends ServiceEntityRepository
         $this->manager->flush();
     }
 
+    /**
+     * @return Tour[]
+     */
+    public function findAllWithCategory(int $num): array
+    {
+        $entityManager = $this->getEntityManager();
+
+        $query = $entityManager->createQuery(
+            'SELECT t
+            FROM App\Entity\Tour t
+            JOIN App\Entity\Categoria
+            WHERE t.categoria_id = :id_categoria
+            ORDER BY t.id ASC'
+        )->setParameter('id_categoria', $num);
+
+        // returns an array of Product objects
+        return $query->getResult();
+    }
+
+
+/*     public function findByIdJoinedToCategory(Tour $tour): Tour
+    {
+        $entityManager = $this->getEntityManager();
+
+        $query = $entityManager->createQuery(
+
+            'SELECT t FROM App\Entity\Tour t
+            WHERE t.id IS NOT NULL
+            ORDER BY t.id ASC'
+        )->setParameter('id', 1);
+            return $query->execute();
+        } */
+
+
     // /**
     //  * @return Tour[] Returns an array of Tour objects
     //  */
@@ -82,4 +117,7 @@ class TourRepository extends ServiceEntityRepository
         ;
     }
     */
+
+
+    
 }

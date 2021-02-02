@@ -7,3 +7,6 @@ home:
     path: /
     controller: App\Controller\HomeController::index
     methods: [GET,POST]
+query:
+    path: /query
+    controller: App\Controller\TourController::queryBuilder
