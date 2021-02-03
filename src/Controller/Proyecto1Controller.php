@@ -21,7 +21,7 @@ class Proyecto1Controller extends AbstractController
     /**
      ** Class Proyecto1Controller
      * @package App\Controller
-     * @Route("/proyecto1", name="proyecto1")
+     * @Route("/proyecto", name="proyecto1")
      */
     public function toursCategorias(): JsonResponse
     {

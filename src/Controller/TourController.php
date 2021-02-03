@@ -20,7 +20,7 @@ use App\Entity\Categoria;
  *
  * @Route(path="/api/")
  */
-class TourController
+class TourController extends AbstractController
 {
     private $tourRepository;
 
@@ -132,5 +132,42 @@ class TourController
 
         return new JsonResponse(['status' => 'Tour deleted'], Response::HTTP_OK);
     }
+
+
+    /**
+    * @Route("proyecto1", name="proyecto1")
+    */
+   public function toursCategorias(): JsonResponse
+   {
+       $tours = $this->getDoctrine()->getRepository(Tour::class)->findAllWithCategory();
+       $data=[];
+       foreach($tours as $tour){
+           array_push($data, [
+               "id" => $tour->getId(),
+               "name" => $tour->getTitulo(),
+               "categoria" => $tour->getCategoria()->getId(),
+           ]);
+           
+       }
+   return new JsonResponse($data, Response::HTTP_OK);
+   }
     
+    /**
+     * @Route("proyecto2", name="proyecto1")
+     */
+    public function findDate(): JsonResponse
+    {
+        $entidades = $this->getDoctrine()->getRepository(Contacto::class)->findCosas();
+        $data=[];
+        foreach($entidades as $ent){
+            array_push($data, [
+                "id" => $ent->getId(),
+                "name" => $ent->getName(),
+                "email" => $ent->getEmail(),
+                "date" => $ent->getDate()->format('d-m-Y H:i:s'),
+            ]);
+            
+        }
+    return new JsonResponse($data, Response::HTTP_OK);
+    }
 }

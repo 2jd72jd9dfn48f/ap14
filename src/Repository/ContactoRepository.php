@@ -55,8 +55,8 @@ class ContactoRepository extends ServiceEntityRepository
     {
     
         $qb = $this->createQueryBuilder("a")
-        ->where('a.fecha > :min')
-        ->andWhere('a.fecha < :max')
+        ->where('a.date > :min')
+        ->andWhere('a.date < :max')
         ->setParameter('min', '2020-12-01')
         ->setParameter('min', '2020-12-01');
 
