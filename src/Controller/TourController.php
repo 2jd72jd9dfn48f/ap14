@@ -20,7 +20,7 @@ use App\Entity\Categoria;
  *
  * @Route(path="/api/")
  */
-class TourController
+class TourController extends AbstractController
 {
     private $tourRepository;
 
@@ -134,20 +134,43 @@ class TourController
     }
     
     /**
-     * @Route("cosas", name="cosas")
+     * @Route("cosascategoria", name="cosasCategoria")
      */
-    public function toursCategorias(TourRepository $tourRepository): JsonResponse
+    public function toursCategorias(): JsonResponse
     {
-        $entidades = $this->$tourRepository->getDoctrine()->getRepository(Tour::class)->findAllWithCategory();
+        $tours = $this->getDoctrine()->getRepository(Tour::class)->findAllWithCategory();
         $data=[];
-        foreach($entidades as $tour){
-            array_push($data,[
-                "id"        => $tour->getId(),
-                "name"      => $tour->getTitulo(),
+        foreach($tours as $tour){
+            array_push($data, [
+                "id" => $tour->getId(),
+                "name" => $tour->getTitulo(),
                 "categoria" => $tour->getCategoria()->getId(),
             ]);
             
         }
     return new JsonResponse($data, Response::HTTP_OK);
     }
+
+        /**
+     * @Route("cosascontacto", name="cosasContacto")
+     */
+    public function index2(): JsonResponse
+    {
+        $entidades = $this->getDoctrine()->getRepository(Contacto::class)->findCosas();
+        $data=[];
+        foreach($entidades as $ent){
+            array_push($data, [
+                "id" => $ent->getId(),
+                "name" => $ent->getName(),
+                "email" => $ent->getEmail(),
+                "date" => $ent->getDate()->format('d-m-Y H:i:s'),
+            ]);
+            
+        }
+    return new JsonResponse($data, Response::HTTP_OK);
+    }
+
+
+
+
 }

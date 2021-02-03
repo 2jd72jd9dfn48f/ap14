@@ -65,9 +65,9 @@ class TourRepository extends ServiceEntityRepository
         $query = $entityManager->createQuery("
         SELECT t, c FROM App\Entity\Tour t 
         JOIN App\Entity\Categoria c");
-        $tours1 = $query->getResult();
+        $tours = $query->getResult();
 
-        return $tours1;
+        return $tours;
     }
 
 
