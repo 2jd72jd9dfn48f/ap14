@@ -65,6 +65,9 @@ class ContactoRepository extends ServiceEntityRepository
         return $query->execute();
     }
 
+    
+    
+
     // /**
     //  * @return Contacto[] Returns an array of Contacto objects
     //  */

@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Tour;
 use App\Entity\Categoria;
+use App\Entity\Contacto;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use DateTimeInterface;
