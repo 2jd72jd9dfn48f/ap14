@@ -12,6 +12,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Entity\Tour;
+use App\Entity\Categoria;
 
 /**
  * Class TourController
@@ -131,50 +132,20 @@ class TourController
 
         return new JsonResponse(['status' => 'Tour deleted'], Response::HTTP_OK);
     }
-
-
-/*     public function queryBuilder()
-    {
-    $num = 1;
-
-    $tours = $this->getDoctrine()
-        ->getRepository(Tour::class)
-        ->findAllWithCategory($num);
-
-
-    foreach($data as $tour){
-
-
-     echo $tour->getTitulo()."<br>";
-    }
-    die();
-    } */
-
-
     
     /**
-     * @Route("/query/{num}", name="querys", methods={"GET"})
+     * @Route("cosas", name="cosas")
      */
-    public function toursCategorias($num): JsonResponse
+    public function toursCategorias(TourRepository $tourRepository): JsonResponse
     {
-
-        $tours = $this->getDoctrine()
-        ->getRepository(Tour::class)
-        ->findAllWithCategory($num);
-
-
-        foreach($tours as $tour)
-        {
-            $data[] = [
-                'id' => $tour->getId(),
-                'name' => $tour->getTitulo(),
-                'image' => $tour->getImagen(),
-                'description' => $tour->getDescription(),
-                'date' => $tour->getDate(),
-                'days' => $tour->getDays(),
-                'price' => $tour->getPrice(),
-                'categoria' => $tour->getCategoria(),
-            ];
+        $entidades = $this->$tourRepository->getDoctrine()->getRepository(Tour::class)->findAllWithCategory();
+        $data=[];
+        foreach($entidades as $tour){
+            array_push($data,[
+                "id"        => $tour->getId(),
+                "name"      => $tour->getTitulo(),
+                "categoria" => $tour->getCategoria()->getId(),
+            ]);
             
         }
     return new JsonResponse($data, Response::HTTP_OK);

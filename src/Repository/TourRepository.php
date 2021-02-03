@@ -56,21 +56,18 @@ class TourRepository extends ServiceEntityRepository
     }
 
     /**
-     * @return Tour[]
-     */
-    public function findAllWithCategory(int $num): array
+    * @return Tour[] Returns an array of Tour objects
+    */
+    public function findAllWithCategory(): array
     {
-        $entityManager = $this->manager;
+        $entityManager = $this->getEntityManager();
 
-        $query = $entityManager->createQuery(
-            'SELECT t
-            FROM App\Entity\Tour t
-            JOIN App\Entity\Categoria
-            WHERE t.categoria_id = :id_categoria
-            ORDER BY t.id ASC'
-        )->setParameter('id_categoria', $num);
+        $query = $entityManager->createQuery("
+        SELECT t, c FROM App\Entity\Tour t 
+        JOIN App\Entity\Categoria c");
+        $tours1 = $query->getResult();
 
-        return $query->getResult();
+        return $tours1;
     }
 
 
@@ -117,6 +114,4 @@ class TourRepository extends ServiceEntityRepository
     }
     */
 
-
-    
 }
