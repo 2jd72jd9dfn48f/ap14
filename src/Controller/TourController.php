@@ -139,7 +139,7 @@ class TourController extends AbstractController
     */
    public function toursCategorias(): JsonResponse
    {
-       $tours = $this->getDoctrine()->getRepository(Tour::class)->findAllWithCategory();
+       $tours = $this->tourRepository->findAllWithCategory();
        $data=[];
        foreach($tours as $tour){
            array_push($data, [

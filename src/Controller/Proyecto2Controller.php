@@ -20,6 +20,13 @@ use App\Entity\Contacto;
 
 class Proyecto2Controller extends AbstractController
 {
+    private $contactoRepository;
+
+    public function __construct(ContactoRepository $contactoRepository)
+    {
+        $this->contactoRepository = $contactoRepository;
+    }
+
     /**
      * 
      * @package App\Controller
@@ -27,7 +34,7 @@ class Proyecto2Controller extends AbstractController
      */
     public function findDate(): JsonResponse
     {
-        $entidades = $this->getDoctrine()->getRepository(Contacto::class)->findCosas();
+        $entidades = $this->contactoRepository->findCosas();
         $data=[];
         foreach($entidades as $ent){
             array_push($data, [
